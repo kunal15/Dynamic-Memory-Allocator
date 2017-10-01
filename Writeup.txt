@@ -1,0 +1,40 @@
+Dhirubhai Ambani Institute of Information and Communication Technology
+
+IT215 : SYSTEM SOFTWARE - PROJECT : DYNAMIC MEMORY ALLOCATOR
+
+Submission By :
+
+Name : Kunal Khatri ID : 201501011
+
+DATE TURNED IN :9th April 2017
+
+DESCRIPTION :
+
+
+
+The code is improvised in three ways:
+
+
+
+1. Explicit Free List
+
+2. Cache Management
+
+3. Realloc Improvisation
+
+
+
+EXPLICIT FREE LIST :Since, the minimum payload size is 2*WSIZE => We can store two addresses in the payload : one, for the previous free block and second, for the next free block. In addition, by maintaining two pointers for the first free block and last free block enables us to improve the time taken by the find_fit(). In coalescing the blocks,now,if the previous or the next block is free, we can coalesce the blocks in constant time. However, when the previous one as well as the next one is allocated, then although there is no point in coalescing, yet, we need to add the block to the free list. So for that, we need to find the last free block, just before the block in consideration. And then we can add it to the free list.
+
+
+
+CACHE MANAGEMENT :There is a concept of cache management employed to improve the performance of the allocator. If one request comes too often, then it gets a VIP status, and then that particular request is serviced directly by mem_sbrk, thus reducing the time to find a suitable block of that size.
+
+
+
+REALLOC IMPROVISATION :The realloc code was pretty naive as it was just mallocing for a block of the new size, every time. However, just changing it to check, whether the next block is free and can give the addtional size to the block in consideration improvred, the performance of the realloc tremendously.
+
+THE FINAL SCORE :(util)32/40 + (thru)60/60 = 92/100(perf index).
+
+
+
